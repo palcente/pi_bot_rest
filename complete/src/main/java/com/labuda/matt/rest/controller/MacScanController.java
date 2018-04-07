@@ -1,10 +1,9 @@
 package com.labuda.matt.rest.controller;
 
 import com.labuda.matt.iface.ICanLog;
-import com.labuda.matt.rest.service.macscan.DatabaseReadService;
+import com.labuda.matt.rest.service.macscan.MacscanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.boot.autoconfigure.batch.JobExecutionEvent;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +20,7 @@ import java.util.Map;
 public class MacScanController implements ICanLog{
 
     @Autowired
-    private DatabaseReadService databaseReadService;
+    private MacscanService databaseReadService;
 
     @RequestMapping("/macdaily/{date}")
     public Map<Timestamp, String[]> daily(@PathVariable(value="date") Date date) {

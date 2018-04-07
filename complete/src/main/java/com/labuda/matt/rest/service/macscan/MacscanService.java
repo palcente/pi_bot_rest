@@ -13,7 +13,7 @@ import java.util.Map;
  */
 
 @Service
-public class DatabaseReadService {
+public class MacscanService {
 
     @Autowired
     private MacscanDao macscanDao;

@@ -1,11 +1,7 @@
 package com.labuda.matt.rest.dao.macscan;
 
 import com.labuda.matt.iface.ICanLog;
-import com.labuda.matt.rest.model.DataPoint;
-import com.labuda.matt.rest.model.Device;
-import com.labuda.matt.rest.model.macscan.MacscanUserTS;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.*;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -18,7 +14,6 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -70,6 +65,7 @@ public class MacscanDao implements ICanLog {
     }
 
     public String[] getCurrentUsers() {
+        _log().debug("Started querying database for current users, at {}",new Date().toString());
         LocalDateTime now = LocalDateTime.now().minus(15,ChronoUnit.MINUTES);
         Map<Timestamp,String[]> result = getDailyData(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()));
         return result.values().stream().flatMap(x->Arrays.stream(x)).collect(Collectors.toList()).toArray(new String[0]);
