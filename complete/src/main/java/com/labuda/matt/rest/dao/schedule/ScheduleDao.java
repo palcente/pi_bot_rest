@@ -26,4 +26,8 @@ public class ScheduleDao implements ICanLog{
     public void scheduleJob(String jobName, String jobParams, String cronExpression) {
         jobSchedule.scheduleJob(jobName,jobParams,cronExpression);
     }
+
+    public void clearSchedule() {
+        jobSchedule.clearSchedule();
+    }
 }

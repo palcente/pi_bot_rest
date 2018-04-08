@@ -18,18 +18,14 @@ public class ScheduleService implements ICanLog{
     @Autowired
     ScheduleDao scheduleDao;
 
-    public Set<JobSchedule.ScheduleEntry> refreshSchedules() {
-        _log().debug("Refreshing Schedules");
-        throw new NotImplementedException();
-    }
-
-    public Set<JobSchedule.ScheduleEntry> checkJournal() {
+    public Set<JobSchedule.ScheduleEntry> listSchedule() {
         return scheduleDao.listScheduledJobs();
     }
 
-    public Set<JobSchedule.ScheduleEntry> clearJournal() {
+    public Set<JobSchedule.ScheduleEntry> clearSchedule() {
         _log().debug("Clearing Schedules");
-        throw new NotImplementedException();
+       scheduleDao.clearSchedule();
+       return scheduleDao.listScheduledJobs();
     }
 
     public void scheduleJob(String jobName, String jobParams, String cronExpression) {

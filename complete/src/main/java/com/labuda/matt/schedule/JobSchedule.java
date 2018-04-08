@@ -1,7 +1,6 @@
 package com.labuda.matt.schedule;
 
 import com.labuda.matt.iface.ICanLog;
-import com.labuda.matt.utils.NotImplementedException;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -13,26 +12,33 @@ import java.util.Set;
 @Component
 public class JobSchedule implements ICanLog{
 
-    protected synchronized void schedule(ScheduleEntry entry){
-        throw new NotImplementedException();
+    private final Set<ScheduleEntry> scheduled = new HashSet<>();
+
+    protected void schedule(ScheduleEntry entry){
+        _log().info("Scheduling the job : {}",entry);
+        getScheduled().add(entry);
     }
 
-    protected synchronized void removeFromSchedule(ScheduleEntry entry){
-        throw new NotImplementedException();
+    protected void unschedule(ScheduleEntry entry){
+        _log().info("Removing the job from the schedule : {}",entry);
+        getScheduled().remove(entry);
     }
 
-    public Set<ScheduleEntry> getScheduled() {
+    public synchronized Set<ScheduleEntry> getScheduled() {
         return scheduled;
     }
-
-    private final Set<ScheduleEntry> scheduled = new HashSet<>();
 
     public void scheduleJob(String jobName, String jobParams, String cronExpression) {
         ScheduleEntry scheduleEntry = new ScheduleEntry();
         scheduleEntry.jobName = jobName;
         scheduleEntry.jobParams=jobParams;
         scheduleEntry.cronExpression=cronExpression;
-        scheduled.add(scheduleEntry);
+        schedule(scheduleEntry);
+    }
+
+    public void clearSchedule() {
+        _log().info("Clearing Schedule");
+        getScheduled().clear();
     }
 
     public class ScheduleEntry {

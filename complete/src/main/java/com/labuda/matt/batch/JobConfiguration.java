@@ -3,7 +3,6 @@ package com.labuda.matt.batch;
 import com.labuda.matt.iface.ICanLog;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
-import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,7 +12,6 @@ import java.util.Collection;
  * Created by mateu on 07/04/2018.
  */
 
-@Component
 public class JobConfiguration implements ICanLog {
 
     private String jobName;
@@ -76,5 +74,16 @@ public class JobConfiguration implements ICanLog {
         return jpb.toJobParameters();
     }
 
+    public String getJobName() {
+        return jobName;
+    }
+
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
+    }
+
+    public Collection<JobConfigurationEntry> getEntries() {
+        return entries;
+    }
 }
 

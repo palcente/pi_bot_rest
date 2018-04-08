@@ -19,7 +19,7 @@ public class BatchService implements ICanLog {
         throw new NotImplementedException();
     }
 
-    public JobConfiguration getJobParameters(String jobName){
+    public JobConfiguration getJobConfiguration(String jobName){
         throw new NotImplementedException();
     }
 

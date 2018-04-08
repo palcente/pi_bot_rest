@@ -22,22 +22,16 @@ public class ScheduleController implements ICanLog {
     @Autowired
     private ScheduleService scheduleService;
 
-    @RequestMapping("/refreshJournal")
-    public Set<JobSchedule.ScheduleEntry> refreshJournal() {
-        _log().debug("Refreshing Journal");
-        return scheduleService.refreshSchedules();
-    }
-
-    @RequestMapping("/checkJournal")
-    public Set<JobSchedule.ScheduleEntry> checkJournal() {
+    @RequestMapping("/listSchedule")
+    public Set<JobSchedule.ScheduleEntry> listSchedule() {
         _log().debug("Checking Journal");
-        return scheduleService.checkJournal();
+        return scheduleService.listSchedule();
     }
 
-    @RequestMapping("/clearJournal")
-    public Set<JobSchedule.ScheduleEntry> clearJournal() {
+    @RequestMapping("/clearSchedule")
+    public Set<JobSchedule.ScheduleEntry> clearSchedule() {
         _log().debug("Clearing Journal");
-        return scheduleService.clearJournal();
+        return scheduleService.clearSchedule();
     }
 
     @RequestMapping("/scheduleJob")
